@@ -1,11 +1,43 @@
-import json
-def calculate_sum_from_json(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        data = json.load(file)
-    total_sum = 0.0
-    for item in data:
-        total_sum += item["score"] * item["weight"]
-        # print(f'{total_sum} = {item["score"]} * {item["weight"]}')
-    # print(round(total_sum, 3))
-    return round(total_sum, 3)
-print(calculate_sum_from_json("input.json"))
+BOOKS_DATABASE = [
+    {
+        "id": 1,
+        "name": "test_name_1",
+        "pages": 200,
+    },
+    {
+        "id": 2,
+        "name": "test_name_2",
+        "pages": 400,
+    }
+]
+
+class Book:
+    def __init__(self, id_, name, pages):
+        self.id = id_
+        self.name = name
+        self.pages = pages
+
+    if not isinstance(id_, int):
+        raise TypeError("Идентификатор книги должен быть типа int")
+    if not isinstance(name, str):
+        raise TypeError("Идентификатор книги должен быть типа str")
+    if pages <= 0:
+        raise ValueError("Количество страниц должно быть положительным числом")
+
+    def __str__(self):
+        return f'Книга "{self.name}"'
+
+    def __repr__(self):
+        return f"Book(id_={self.id}, name='{self.name}', pages={self.pages})"
+
+
+if __name__ == 'Класс Book':
+    list_books = [
+        Book(id_=book_dict["id"], name=book_dict["name"], pages=book_dict["pages"])
+        for book_dict in BOOKS_DATABASE
+    ]
+
+    for book in list_books:
+        print(book)
+
+    print(list_books)
